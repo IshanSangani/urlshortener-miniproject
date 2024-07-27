@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            padding-top: 3rem;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .table thead {
+            background-color: #f8f9fa;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        footer {
+            margin-top: 3rem;
+            padding: 1rem 0;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">URL Shortener</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center my-4">Shorten Your URL</h1>
+        <form action="/url/shortUrl" method="POST" class="mb-4">
+            <div class="input-group">
+                <input required placeholder="Enter a URL to shorten" type="url" name="fullUrl" id="fullUrl" class="form-control">
+                <button type="submit" class="btn btn-primary">Shorten</button>
+            </div>
+        </form>
+
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>Full URL</th>
+                    <th>Short URL</th>
+                    <th>Clicks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% shortUrls.forEach(shortUrl => { %>
+                    <tr>
+                        <td><a href="<%= shortUrl.full %>" target="_blank"><%= shortUrl.full %></a></td>
+                        <td><a href="/url/<%= shortUrl.short %>" target="_blank"><%= shortUrl.short %></a></td>
+                        <td><%= shortUrl.clicks %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 URL Shortener. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-Z9j6Z0+2mwH7Z7n4mLbkX/Ngr49HufVrLaHHLvMti32cb5rnWGMimMld1l8uN6sX" crossorigin="anonymous"></script>
+</body>
+</html>
